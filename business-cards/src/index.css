@@ -20,3 +20,11 @@ body{
 .bc{
   color: #b1228c;
 }
+
+p.hide{
+    display:none;
+}
+
+p.show{
+    display:block;
+}
