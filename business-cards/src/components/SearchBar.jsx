@@ -1,7 +1,7 @@
-export default function SearchBar(){
-    return(
+export default function SearchBar({ isHidden, onClick }) {
+    return (
         <div>
-            <p>Search email</p>
+            <p onClick={onClick}><strong>Show email</strong></p>
             <input type="text" />
         </div>
     )
