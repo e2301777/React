@@ -1,4 +1,8 @@
+
+
 export default function TransactionForm(){
+
+
     return(
         <div className="form">
             <label htmlFor="description">Description:</label>
@@ -6,7 +10,9 @@ export default function TransactionForm(){
             <label htmlFor="sum">Sum:</label>
             <input type="text" placeholder="sum"/>
             <button>Add Transaction</button>
+            
         </div>
     )
 
 }
+

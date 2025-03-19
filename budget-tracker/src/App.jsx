@@ -6,14 +6,19 @@ import TransactionList from './components/TransactionList.jsx'
 import './App.css'
 import './index.css'
 
+const TRANSACTIONS = [1]
+
 function App() {
     const [balance, setBalance] = useState(200)
+
+
 
     return (
         <div className='container'>
             <Header balance={balance}/>
             <TransactionForm/>
-            <TransactionList/>
+            {TRANSACTIONS.length !== 0 && <TransactionList/>}
+            
         </div>
       )
 }
