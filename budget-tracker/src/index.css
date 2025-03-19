@@ -45,7 +45,7 @@ body {
     margin: 10px 0;
   }
   
-  .form {
+  form {
     display: flex;
     flex-direction: column;
     gap: 10px;
