@@ -1,8 +1,4 @@
-import { useState } from 'react'
-
-
-
-
+import { useState, useEffect } from 'react'
 
 export default function TransactionForm(){
 
@@ -22,12 +18,9 @@ export default function TransactionForm(){
         const newTransaction = {reason: inputs.reason, sum: inputs.sum};
         setTransactions(prevTransactions => [newTransaction, ...prevTransactions]);
         setInputs({reason: '', sum: 0})
-        console.log(TRANSACTIONS);
-   
-
-
-        
     }
+
+    useEffect(() => console.log(TRANSACTIONS), [TRANSACTIONS]);
 
 
     return(
