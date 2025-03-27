@@ -1,9 +1,9 @@
-export default function Transaction({ reason, sum }){
+export default function Transaction({ reason, sum, onRemove }){
     return(
         <li className="income">
             {reason}
             {sum}
-            <button>Poista</button>
+            <button onClick={onRemove}>Poista</button>
         </li>
     )
 

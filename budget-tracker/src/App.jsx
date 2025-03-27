@@ -9,16 +9,25 @@ import './index.css'
 
 
 function App() {
-    const [balance, setBalance] = useState(200)
+    const [balance, setBalance] = useState(50)
+    const [transactions, setTransactions] = useState([]);
 
 
 
     return (
         <div className='container'>
             <Header balance={balance}/>
-            <TransactionForm/>
-            <TransactionList/>
-            
+            <TransactionForm 
+                setTransactions={setTransactions} 
+                transactions={transactions} 
+                setBalance={setBalance} 
+                balance={balance}/>
+            <TransactionList 
+                setTransactions ={setTransactions}
+                transactions={transactions}
+                setBalance={setBalance} 
+                balance={balance}/>
+
         </div>
       )
 }
