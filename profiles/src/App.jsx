@@ -7,8 +7,8 @@ function App() {
     <div className="profile-container">
         <ProfileCard style="vanilla" useStyled={false}/>
         <ProfileCard style="styled" useStyled={true}/>
-        <ProfileCard style="vanilla" useStyled={false}/>
-        <ProfileCard style="vanilla" useStyled={false}/>
+        <ProfileCard style="tailwind" useStyled={false}/>
+        <ProfileCard style="materialUI" useStyled={false}/>
     </div>
   )
 }
