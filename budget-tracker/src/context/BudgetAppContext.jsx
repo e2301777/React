@@ -6,6 +6,7 @@ const initialState = {
   transactions: [],
   theme: "light", // Default theme
   currency: "€",  // Default currency
+  categories: ["salary", "food", "gasoline", "candies", "electricity"], // Add categories
 };
 
 // Reducer function

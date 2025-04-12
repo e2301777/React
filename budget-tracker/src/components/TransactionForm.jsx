@@ -1,9 +1,15 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useBudgetApp } from "../context/BudgetAppContext.jsx";
 
 export default function TransactionForm() {
-  const { dispatch } = useBudgetApp();
-  const [inputs, setInputs] = useState({ reason: "", sum: 0 });
+  const { state, dispatch } = useBudgetApp();
+  const [inputs, setInputs] = useState({ reason: "", sum: 0, category: "salary" });
+  const descriptionRef = useRef(null); // Ref for the description input
+
+  // Auto-focus on the description input when the form appears
+  useEffect(() => {
+    descriptionRef.current.focus();
+  }, []);
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -13,9 +19,9 @@ export default function TransactionForm() {
   function handleSubmit(e) {
     e.preventDefault();
     const sum = parseFloat(inputs.sum);
-    const newTransaction = { reason: inputs.reason, sum };
+    const newTransaction = { reason: inputs.reason, sum, category: inputs.category };
     dispatch({ type: "ADD_TRANSACTION", payload: newTransaction });
-    setInputs({ reason: "", sum: 0 });
+    setInputs({ reason: "", sum: 0, category: "salary" });
   }
 
   return (
@@ -26,16 +32,29 @@ export default function TransactionForm() {
         name="reason"
         value={inputs.reason}
         onChange={handleChange}
-        placeholder="Reason"
+        placeholder="Enter description..."
+        ref={descriptionRef} // Attach the ref to the input
       />
-      <label htmlFor="sum">Sum:</label>
+      <label htmlFor="sum">Amount:</label>
       <input
-        type="text"
+        type="number"
         name="sum"
         value={inputs.sum}
         onChange={handleChange}
-        placeholder="Sum"
+        placeholder="Enter amount..."
       />
+      <label htmlFor="category">Category:</label>
+      <select
+        name="category"
+        value={inputs.category}
+        onChange={handleChange}
+      >
+        {state.categories.map((category, index) => (
+          <option key={index} value={category}>
+            {category}
+          </option>
+        ))}
+      </select>
       <button>Add Transaction</button>
     </form>
   );

@@ -32,6 +32,7 @@ export default function TransactionList() {
             key={index}
             reason={transaction.reason}
             sum={transaction.sum}
+            category={transaction.category} // Pass category to Transaction
             onRemove={() => handleDelete(index)}
           />
         ))}
