@@ -1,0 +1,101 @@
+#root {
+  width: 90vw;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* Ensure the app-container is a flex container */
+.app-container {
+  display: flex;
+  width: 80%;
+  justify-content: space-between; /* Space out the child elements */
+  align-items: flex-start; /* Align items at the top */
+  gap: 20px; /* Add spacing between the containers */
+  padding: 20px;
+  background-color: #020202;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+/* Style for individual containers */
+.app-container > * {
+  display: flex;
+  flex: 1; /* Make all containers take equal width */
+  flex-direction: column;
+  align-items: center;
+  width: 30%; /* Limit the width of each container */
+  box-sizing: border-box; /* Include padding and border in width/height */
+}
+
+/* Optional: Add some styling for better visuals */
+.app-container > * {
+  border-radius: 8px;
+  padding: 10px;
+}
+
+button{
+    width:auto;
+    margin-top: 10px;
+}
+
+.build-container{
+    background-color: #020202;
+    border: 1px solid #ddd;
+    min-height: 50vh;
+}
+.stats-container{
+    min-height: 30vh;
+}
+
+.items-container{
+    flex-wrap: wrap;
+    display: flex;
+    align-items: flex-start;
+    background-color: #020202;
+    border: 1px solid #ddd;
+    width: auto;
+}
+
+.item{
+    margin: 5px;
+}
