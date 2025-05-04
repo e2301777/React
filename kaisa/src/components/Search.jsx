@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { BuildContext } from "./build-context";
 
-export default function Search({ itemData, itemsInBuild, setItemsInBuild }) {
+export default function Search() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredItems, setFilteredItems] = useState([]);
-  const [buildFull, setbuildFull] = useState(false);
+  const { itemData, addItemToBuild, buildFull, resetBuildFull } =
+    useContext(BuildContext);
 
   function checkItem(event) {
     const value = event.target.value;
@@ -18,20 +20,22 @@ export default function Search({ itemData, itemsInBuild, setItemsInBuild }) {
   }
 
   function handleAddItemToBuild(item) {
-    if(itemsInBuild.length < 6){
-        setItemsInBuild([...itemsInBuild, item]); // Add the selected item to the build
+    addItemToBuild(item);
+    if (buildFull) {
+      setTimeout(() => resetBuildFull(), 2000); // Reset the buildFull state after 2 seconds
     }
-    else{
-        setbuildFull(true);
-    }
-    
   }
 
   return (
     <div className="search-container">
       <h2>Search items</h2>
-      <input type="text" value={searchTerm} onChange={checkItem} placeholder='Search...' />
-      {buildFull && <p> Build full!</p>}
+      <input
+        type="text"
+        value={searchTerm}
+        onChange={checkItem}
+        placeholder="Search..."
+      />
+      {buildFull && <p>Build full!</p>}
       <div className="items-container">
         {filteredItems.length > 0 ? (
           filteredItems.map(([id, item]) => (
