@@ -1,11 +1,18 @@
+/* Set the background image for the app */
 #root {
-  width: 90vw;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  width: 100vw; /* Full width of the viewport */
+  height: 100vh; /* Full height of the viewport */
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  background-image: url("./assets/kaisabg.PNG"); /* Use kaisabg.PNG as the background */
+  background-size: cover; /* Ensure the image covers the entire background */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  box-sizing: border-box; /* Include padding and border in width/height */
 }
 
 .logo {
@@ -52,9 +59,16 @@
   align-items: flex-start; /* Align items at the top */
   gap: 20px; /* Add spacing between the containers */
   padding: 20px;
-  background-color: #020202;
-  border: 1px solid #ddd;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.8
+  ); /* Add a semi-transparent black background */
+  border: 1px solid purple;
   border-radius: 8px;
+  opacity: 0.8; /* Set the opacity to 80% */
+  box-sizing: border-box;
 }
 
 /* Style for individual containers */
@@ -73,29 +87,105 @@
   padding: 10px;
 }
 
-button{
-    width:auto;
-    margin-top: 10px;
+button {
+  width: auto;
+  margin-top: 10px;
 }
 
-.build-container{
-    background-color: #020202;
-    border: 1px solid #ddd;
-    min-height: 50vh;
-}
-.stats-container{
-    min-height: 30vh;
-}
-
-.items-container{
-    flex-wrap: wrap;
-    display: flex;
-    align-items: flex-start;
-    background-color: #020202;
-    border: 1px solid #ddd;
-    width: auto;
+/* Style for the build-container */
+.build-container {
+  background-color: #020202;
+  border: 1px solid purple;
+  min-height: 50vh;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  gap: 20px; /* Add spacing between elements */
 }
 
-.item{
-    margin: 5px;
+/* Style for the build-items container */
+.build-items {
+  display: grid; /* Use grid for layout */
+  grid-template-columns: repeat(2, 1fr); /* Two items per row */
+  gap: 10px; /* Add spacing between items */
+  margin-top: 20px; /* Add spacing above the build-items */
+}
+
+/* Style for individual items in the build-container */
+.build-items div {
+  text-align: center;
+}
+
+.build-items img {
+  width: 48px;
+  height: 48px;
+  border: purple solid 1px;
+  border-radius: 4px;
+}
+
+.build-items .delete-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.build-items .delete-icon:hover {
+    border: solid red 1px;
+  }
+
+.build-items p {
+  margin: 5px 0 0;
+  color: white;
+  font-size: 14px;
+}
+
+.stats-container {
+  min-height: 30vh;
+}
+
+/* Style for the search container */
+.search-container {
+  margin-bottom: 20px; /* Ensure 20px spacing between the search field and items-container */
+  text-align: center; /* Center the search field */
+  display: flex;
+  flex-direction: column; /* Stack the search field and items-container vertically */
+  align-items: center; /* Center the content horizontally */
+}
+
+/* Add explicit margin to the input field */
+.search-container input {
+  margin-bottom: 20px; /* Add 20px spacing below the search field */
+}
+
+/* Style for the items-container */
+.items-container {
+  max-height: 300px; /* Set a static height */
+  overflow-y: auto; /* Add vertical scrolling if content overflows */
+  background-color: #020202; /* Match the app's theme */
+  border: 1px solid purple; /* Add a border for better visibility */
+  border-radius: 8px; /* Add rounded corners */
+  padding: 10px; /* Add padding inside the container */
+  width: 250px; /* Set a fixed width for the container */
+  box-sizing: border-box; /* Include padding and border in the width/height */
+  text-align: center; /* Center the content horizontally */
+}
+
+/* Style for individual items */
+.item {
+  display: block; /* Ensure each item takes up one line */
+  margin: 10px auto; /* Center the item horizontally and add spacing */
+  padding: 10px;
+  background-color: #1a1a1a;
+  color: white;
+  border: 1px solid #444;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center; /* Center the text inside the button */
+  width: 80%; /* Set a fixed width for the items */
+}
+
+.item:hover {
+  background-color: #333;
 }

@@ -1,10 +1,15 @@
 import { useState } from "react";
 
-export default function Build() {
+export default function Build({ itemsInBuild }) {
   const [level, setLevel] = useState(1);
 
   function handleSliderChange(event) {
     setLevel(event.currentTarget.value);
+  }
+
+  function handleDeleteItem(){
+    console.log('lol');
+    
   }
 
   return (
@@ -19,6 +24,22 @@ export default function Build() {
         max={18}
         defaultValue={level}
       />
+      <div className='build-items'>
+        {itemsInBuild.map((item, index) => (
+          <div key={index}>
+            <img
+              src={`https://ddragon.leagueoflegends.com/cdn/15.7.1/img/item/${item.image.full}`}
+              alt={item.name}
+            />
+            <img className="delete-icon"
+              src='../src/assets/delete.PNG'
+              alt='delete'
+              onClick={handleDeleteItem}
+            />
+            <p>{item.name}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
