@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export default function Build() {
-  const [level, setLevel] = useState(0);
+  const [level, setLevel] = useState(1);
 
   function handleSliderChange(event) {
     setLevel(event.currentTarget.value);
