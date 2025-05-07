@@ -7,8 +7,6 @@ function buildReducer(state, action) {
     case "ADD_ITEM":
       if (state.itemsInBuild.length < 6) {
         const newStats = { ...state.stats };
-
-        // Update stats based on the item's stats property
         if (action.payload.stats.FlatPhysicalDamageMod) {
           newStats.ad += action.payload.stats.FlatPhysicalDamageMod;
         }
@@ -18,7 +16,6 @@ function buildReducer(state, action) {
         if (action.payload.stats.PercentAttackSpeedMod) {
           newStats.as += action.payload.stats.PercentAttackSpeedMod;
         }
-
         return {
           ...state,
           itemsInBuild: [...state.itemsInBuild, action.payload],
@@ -28,32 +25,35 @@ function buildReducer(state, action) {
       return { ...state, buildFull: true };
 
     case "REMOVE_ITEM":
-      const removedItem = state.itemsInBuild[action.payload];
-      const updatedStats = { ...state.stats };
-
-      // Subtract stats based on the removed item's stats property
-      if (removedItem.stats.FlatPhysicalDamageMod) {
-        updatedStats.ad -= removedItem.stats.FlatPhysicalDamageMod;
+      {
+        const removedItem = state.itemsInBuild[action.payload];
+        const updatedStats = { ...state.stats };
+        if (removedItem.stats.FlatPhysicalDamageMod) {
+          updatedStats.ad -= removedItem.stats.FlatPhysicalDamageMod;
+        }
+        if (removedItem.stats.FlatMagicDamageMod) {
+          updatedStats.ap -= removedItem.stats.FlatMagicDamageMod;
+        }
+        if (removedItem.stats.PercentAttackSpeedMod) {
+          updatedStats.as -= removedItem.stats.PercentAttackSpeedMod;
+        }
+        return {
+          ...state,
+          itemsInBuild: state.itemsInBuild.filter((item, index) => index !== action.payload),
+          stats: updatedStats,
+        };
       }
-      if (removedItem.stats.FlatMagicDamageMod) {
-        updatedStats.ap -= removedItem.stats.FlatMagicDamageMod;
-      }
-      if (removedItem.stats.PercentAttackSpeedMod) {
-        updatedStats.as -= removedItem.stats.PercentAttackSpeedMod;
-      }
-
-      return {
-        ...state,
-        itemsInBuild: state.itemsInBuild.filter(
-          (item, index) => index !== action.payload
-        ),
-        stats: updatedStats,
-      };
 
     case "UPDATE_LEVEL":
       return {
         ...state,
         level: action.payload.level,
+      };
+
+    case "SET_THEME":
+      return {
+        ...state,
+        theme: action.payload.theme,
       };
 
     default:
@@ -65,14 +65,14 @@ export default function BuildContextProvider({ children }) {
   const [buildState, buildDispatch] = useReducer(buildReducer, {
     itemsInBuild: [],
     buildFull: false,
-    stats: { ad: 0, ap: 0, as: 0 }, // Initialize stats
-    level: 1, // Default level
+    stats: { ad: 0, ap: 0, as: 0 },
+    level: 1, // Default champion level
+    theme: "default", // Default theme name or identifier
   });
 
-  const [itemData, setItemData] = useState(null); // State to store fetched item data
+  const [itemData, setItemData] = useState(null);
 
   useEffect(() => {
-    // Fetch item data from the API
     fetch("https://ddragon.leagueoflegends.com/cdn/15.7.1/data/en_US/item.json")
       .then((response) => response.json())
       .then((data) => {
@@ -82,7 +82,7 @@ export default function BuildContextProvider({ children }) {
             acc[id] = item;
             return acc;
           }, {});
-        setItemData(filteredData); // Store the filtered data
+        setItemData(filteredData);
       })
       .catch((error) => console.error("Error fetching item data:", error));
   }, []);
@@ -99,6 +99,10 @@ export default function BuildContextProvider({ children }) {
     buildDispatch({ type: "UPDATE_LEVEL", payload: { level } });
   };
 
+  const setTheme = (theme) => {
+    buildDispatch({ type: "SET_THEME", payload: { theme } });
+  };
+
   return (
     <BuildContext.Provider
       value={{
@@ -106,10 +110,12 @@ export default function BuildContextProvider({ children }) {
         buildFull: buildState.buildFull,
         stats: buildState.stats,
         level: buildState.level,
+        theme: buildState.theme,
         itemData,
         addItemToBuild,
         removeItemFromBuild,
         updateLevel,
+        setTheme,
       }}
     >
       {children}

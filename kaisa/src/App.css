@@ -8,7 +8,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: url("./assets/kaisabg.PNG"); /* Use kaisabg.PNG as the background */
+  background-image: url("./assets/default.PNG"); /* Use kaisabg.PNG as the background */
   background-size: cover; /* Ensure the image covers the entire background */
   background-position: center; /* Center the background image */
   background-repeat: no-repeat; /* Prevent the image from repeating */
@@ -189,3 +189,84 @@ button {
 .item:hover {
   background-color: #333;
 }
+
+/* Existing styles... */
+
+/* Settings Button styling: centered horizontally below the app-container */
+.settings-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 24px;
+    background-color: purple;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    z-index: 10;
+  }
+  
+  /* Modal overlay dims the rest of the app */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 100;
+  }
+  
+  /* Settings Modal styling */
+  .settings-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.95);
+    border: 1px solid purple;
+    border-radius: 8px;
+    padding: 20px;
+    width: auto;
+    box-sizing: border-box;
+    text-align: center;
+    color: white;
+    z-index: 101;
+  }
+  
+  /* Additional Modal button hover style */
+  .settings-modal button {
+    
+    padding: 5px;
+    
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .settings-modal button:hover {
+    background-color: #5a005a;
+  }
+  
+  /* Simple Theme Selector Styles using a 5x3 grid */
+.theme-selector {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* Let grid auto-fill rows */
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .theme-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .theme-btn img {
+    width: 50px; /* Adjust size as desired */
+    height: 50px; /* Adjust size as desired */
+    object-fit: cover;
+    border-radius: 4px;
+  }
