@@ -25,7 +25,7 @@ function buildReducer(state, action) {
           stats: newStats,
         };
       }
-      return { ...state, buildFull: true }; // Indicate the build is full
+      return { ...state, buildFull: true };
 
     case "REMOVE_ITEM":
       const removedItem = state.itemsInBuild[action.payload];
@@ -50,8 +50,11 @@ function buildReducer(state, action) {
         stats: updatedStats,
       };
 
-    case "RESET_BUILD_FULL":
-      return { ...state, buildFull: false };
+    case "UPDATE_LEVEL":
+      return {
+        ...state,
+        level: action.payload.level,
+      };
 
     default:
       return state;
@@ -63,6 +66,7 @@ export default function BuildContextProvider({ children }) {
     itemsInBuild: [],
     buildFull: false,
     stats: { ad: 0, ap: 0, as: 0 }, // Initialize stats
+    level: 1, // Default level
   });
 
   const [itemData, setItemData] = useState(null); // State to store fetched item data
@@ -91,8 +95,8 @@ export default function BuildContextProvider({ children }) {
     buildDispatch({ type: "REMOVE_ITEM", payload: index });
   };
 
-  const resetBuildFull = () => {
-    buildDispatch({ type: "RESET_BUILD_FULL" });
+  const updateLevel = (level) => {
+    buildDispatch({ type: "UPDATE_LEVEL", payload: { level } });
   };
 
   return (
@@ -100,11 +104,12 @@ export default function BuildContextProvider({ children }) {
       value={{
         itemsInBuild: buildState.itemsInBuild,
         buildFull: buildState.buildFull,
-        stats: buildState.stats, // Provide stats to the context
-        itemData, // Provide the fetched item data to the context
+        stats: buildState.stats,
+        level: buildState.level,
+        itemData,
         addItemToBuild,
         removeItemFromBuild,
-        resetBuildFull,
+        updateLevel,
       }}
     >
       {children}

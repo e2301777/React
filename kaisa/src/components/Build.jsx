@@ -1,12 +1,12 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { BuildContext } from "./build-context";
 
 export default function Build() {
-  const [level, setLevel] = useState(1);
-  const { itemsInBuild, removeItemFromBuild } = useContext(BuildContext);
+  const { itemsInBuild, removeItemFromBuild, updateLevel, level } = useContext(BuildContext);
 
   function handleSliderChange(event) {
-    setLevel(event.currentTarget.value);
+    const newLevel = parseInt(event.target.value, 10);
+    updateLevel(newLevel); // Update the level in the context
   }
 
   return (
