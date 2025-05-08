@@ -5,7 +5,7 @@ export const BuildContext = createContext();
 const themeColorSchemes = {
   "Default.PNG": { primary: "#ffffff", secondary: "#140027", accent: "#671577" },
   "BulletAngel.PNG": { primary: "#ffffff", secondary: "#252458", accent: "#aeaeaf" },
-  "KDA.PNG": { primary: "#ff66cc", secondary: "#40007c", accent: "#7942ad" },
+  "KDA.PNG": { primary: "#ff66cc", secondary: "#40007c", accent: "#eeb61d" },
   "PrestigeKDA.PNG": { primary: "#ffcc99", secondary: "#663300", accent: "#ff9966" },
   "KDAALLOUT.PNG": { primary: "#cc99ff", secondary: "#2a0470", accent: "#a5dbfa" },
   "PrestigeKDAALLOUT.PNG": { primary: "#a5dbfa", secondary: "#663300", accent: "#db98fa" },
@@ -78,13 +78,15 @@ function buildReducer(state, action) {
 }
 
 export default function BuildContextProvider({ children }) {
+  const savedTheme = localStorage.getItem("theme") || "Default.PNG";
+
   const [buildState, buildDispatch] = useReducer(buildReducer, {
     itemsInBuild: [],
     buildFull: false,
     stats: { ad: 0, ap: 0, as: 0 },
     level: 1, // Default champion level
-    theme: "Default.PNG", // Default theme name or identifier
-    colorScheme: themeColorSchemes["Default.PNG"],
+    theme: savedTheme,
+    colorScheme: themeColorSchemes[savedTheme],
   });
 
   const [itemData, setItemData] = useState(null);
@@ -118,7 +120,15 @@ export default function BuildContextProvider({ children }) {
 
   const setTheme = (theme) => {
     buildDispatch({ type: "SET_THEME", payload: { theme } });
+    localStorage.setItem("theme", theme); // Save the theme to local storage
   };
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      buildDispatch({ type: "SET_THEME", payload: { theme: savedTheme } });
+    }
+  }, []);
 
   return (
     <BuildContext.Provider

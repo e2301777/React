@@ -146,7 +146,7 @@ button {
 .build-items img {
   width: 48px;
   height: 48px;
-  border: purple solid 1px;
+  border: rgb(204, 203, 203) solid 1px;
   border-radius: 4px;
 }
 

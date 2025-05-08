@@ -8,7 +8,7 @@ export default function Stats() {
   const { stats, level } = useContext(BuildContext);
 
   const getStatStyle = (value) => ({
-    color: value >= 100 ? "green" : "white",
+    color: value.toFixed(0) >= 100 ? "green" : "white",
   });
 
   const levelAd = kaisalvlAd[level - 1]; // Adjust for 0-based index
