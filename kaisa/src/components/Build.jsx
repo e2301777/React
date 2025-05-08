@@ -22,21 +22,37 @@ export default function Build() {
         defaultValue={level}
       />
       <div className="build-items">
-        {itemsInBuild.map((item, index) => (
-          <div key={index}>
-            <img
-              src={`https://ddragon.leagueoflegends.com/cdn/15.7.1/img/item/${item.image.full}`}
-              alt={item.name}
-            />
-            <img
-              className="delete-icon"
-              src="../src/assets/delete.PNG"
-              alt="delete"
-              onClick={() => removeItemFromBuild(index)}
-            />
-            <p>{item.name}</p>
-          </div>
-        ))}
+        {itemsInBuild.map((item, index) => {
+          // Dynamically construct the title based on available stats
+          const stats = [];
+          if (item.stats.FlatPhysicalDamageMod) {
+            stats.push(`AD: ${item.stats.FlatPhysicalDamageMod}`);
+          }
+          if (item.stats.FlatMagicDamageMod) {
+            stats.push(`AP: ${item.stats.FlatMagicDamageMod}`);
+          }
+          if (item.stats.PercentAttackSpeedMod) {
+            stats.push(`AS: ${(item.stats.PercentAttackSpeedMod * 100)}%`);
+          }
+          const title = stats.join(", ");
+
+          return (
+            <div key={index}>
+              <img
+                src={`https://ddragon.leagueoflegends.com/cdn/15.7.1/img/item/${item.image.full}`}
+                alt={item.name}
+                title={title} // Dynamically set the title
+              />
+              <img
+                className="delete-icon"
+                src="../src/assets/delete.PNG"
+                alt="delete"
+                onClick={() => removeItemFromBuild(index)}
+              />
+              <p>{item.name}</p>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

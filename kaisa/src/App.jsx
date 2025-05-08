@@ -70,7 +70,7 @@ function AppContent() {
                 </button>
               ))}
             </div>
-            <button onClick={toggleModal}>Close</button>
+            <button className="theme-btn" onClick={toggleModal}>Close</button>
           </div>
         </>
       )}
