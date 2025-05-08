@@ -2,6 +2,21 @@ import { createContext, useReducer, useEffect, useState } from "react";
 
 export const BuildContext = createContext();
 
+const themeColorSchemes = {
+  "Default.PNG": { primary: "#ffffff", secondary: "#140027", accent: "#671577" },
+  "BulletAngel.PNG": { primary: "#ffffff", secondary: "#252458", accent: "#aeaeaf" },
+  "KDA.PNG": { primary: "#ff66cc", secondary: "#40007c", accent: "#7942ad" },
+  "PrestigeKDA.PNG": { primary: "#ffcc99", secondary: "#663300", accent: "#ff9966" },
+  "KDAALLOUT.PNG": { primary: "#cc99ff", secondary: "#2a0470", accent: "#a5dbfa" },
+  "PrestigeKDAALLOUT.PNG": { primary: "#a5dbfa", secondary: "#663300", accent: "#db98fa" },
+  "iG.PNG": { primary: "#ffffff", secondary: "#00031b", accent: "#9fe0fa" },
+  "Arcade.PNG": { primary: "#50cccc", secondary: "#683281", accent: "#0aad69" },
+  "StarGuardian.PNG": { primary: "#ff99ff", secondary: "#660066", accent: "#e7b100" },
+  "Heavenscale.PNG": { primary: "#e7b100", secondary: "#003333", accent: "#e77000" },
+  "Inkshadow.PNG": { primary: "#cc0000", secondary: "#141414", accent: "#990000" },
+  "LagoonDragon.PNG": { primary: "#66ccff", secondary: "#005c5c", accent: "#8f7e51" },
+};
+
 function buildReducer(state, action) {
   switch (action.type) {
     case "ADD_ITEM":
@@ -54,6 +69,7 @@ function buildReducer(state, action) {
       return {
         ...state,
         theme: action.payload.theme,
+        colorScheme: themeColorSchemes[action.payload.theme],
       };
 
     default:
@@ -67,7 +83,8 @@ export default function BuildContextProvider({ children }) {
     buildFull: false,
     stats: { ad: 0, ap: 0, as: 0 },
     level: 1, // Default champion level
-    theme: "default", // Default theme name or identifier
+    theme: "Default.PNG", // Default theme name or identifier
+    colorScheme: themeColorSchemes["Default.PNG"],
   });
 
   const [itemData, setItemData] = useState(null);
@@ -111,6 +128,7 @@ export default function BuildContextProvider({ children }) {
         stats: buildState.stats,
         level: buildState.level,
         theme: buildState.theme,
+        colorScheme: buildState.colorScheme,
         itemData,
         addItemToBuild,
         removeItemFromBuild,

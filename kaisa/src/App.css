@@ -8,11 +8,42 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: url("./assets/default.PNG"); /* Use kaisabg.PNG as the background */
+  background-image: url("./assets/Default.PNG"); /* Use kaisabg.PNG as the background */
   background-size: cover; /* Ensure the image covers the entire background */
   background-position: center; /* Center the background image */
   background-repeat: no-repeat; /* Prevent the image from repeating */
   box-sizing: border-box; /* Include padding and border in width/height */
+}
+
+:root {
+  --primary-color: #ffffff;
+  --secondary-color: #140027;
+  --accent-color: #671577;
+}
+
+body {
+  color: var(--primary-color);
+  background-color: var(--secondary-color);
+  text-shadow: 2px 2px #000000;
+}
+
+h1{
+    text-shadow: 3px 3px #000000;
+}
+
+button {
+  background-color: var(--accent-color);
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+button:hover {
+  color: var(--accent-color);
+}
+
+header {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
 }
 
 .logo {
@@ -59,13 +90,8 @@
   align-items: flex-start; /* Align items at the top */
   gap: 20px; /* Add spacing between the containers */
   padding: 20px;
-  background-color: rgba(
-    0,
-    0,
-    0,
-    0.8
-  ); /* Add a semi-transparent black background */
-  border: 1px solid purple;
+  background-color: var(--secondary-color);
+  border: 1px solid var(--accent-color);
   border-radius: 8px;
   opacity: 0.8; /* Set the opacity to 80% */
   box-sizing: border-box;
@@ -94,8 +120,8 @@ button {
 
 /* Style for the build-container */
 .build-container {
-  background-color: #020202;
-  border: 1px solid purple;
+  background-color: var(--secondary-color);
+  border: 1px solid var(--accent-color);
   min-height: 50vh;
   padding: 20px;
   border-radius: 8px;
@@ -132,8 +158,8 @@ button {
 }
 
 .build-items .delete-icon:hover {
-    border: solid red 1px;
-  }
+  border: solid red 1px;
+}
 
 .build-items p {
   margin: 5px 0 0;
@@ -143,6 +169,8 @@ button {
 
 .stats-container {
   min-height: 30vh;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
 }
 
 /* Style for the search container */
@@ -157,14 +185,17 @@ button {
 /* Add explicit margin to the input field */
 .search-container input {
   margin-bottom: 20px; /* Add 20px spacing below the search field */
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  border: 1px solid var(--accent-color);
 }
 
 /* Style for the items-container */
 .items-container {
   max-height: 300px; /* Set a static height */
   overflow-y: auto; /* Add vertical scrolling if content overflows */
-  background-color: #020202; /* Match the app's theme */
-  border: 1px solid purple; /* Add a border for better visibility */
+  background-color: var(--secondary-color);
+  border: 1px solid var(--accent-color);
   border-radius: 8px; /* Add rounded corners */
   padding: 10px; /* Add padding inside the container */
   width: 250px; /* Set a fixed width for the container */
@@ -194,79 +225,77 @@ button {
 
 /* Settings Button styling: centered horizontally below the app-container */
 .settings-button {
-    display: block;
-    margin: 20px auto;
-    padding: 10px 24px;
-    background-color: purple;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    z-index: 10;
-  }
-  
-  /* Modal overlay dims the rest of the app */
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 100;
-  }
-  
-  /* Settings Modal styling */
-  .settings-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.95);
-    border: 1px solid purple;
-    border-radius: 8px;
-    padding: 20px;
-    width: auto;
-    box-sizing: border-box;
-    text-align: center;
-    color: white;
-    z-index: 101;
-  }
-  
-  /* Additional Modal button hover style */
-  .settings-modal button {
-    
-    padding: 5px;
-    
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .settings-modal button:hover {
-    background-color: #5a005a;
-  }
-  
-  /* Simple Theme Selector Styles using a 5x3 grid */
+  display: block;
+  margin: 20px auto;
+  padding: 10px 24px;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  border: 1px solid var(--accent-color);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 10;
+}
+
+/* Modal overlay dims the rest of the app */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 100;
+}
+
+/* Settings Modal styling */
+.settings-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  border: 1px solid var(--accent-color);
+  border-radius: 8px;
+  padding: 20px;
+  width: auto;
+  box-sizing: border-box;
+  text-align: center;
+  z-index: 101;
+}
+
+/* Additional Modal button hover style */
+.settings-modal button {
+  padding: 5px;
+
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+
+/* Simple Theme Selector Styles using a 5x3 grid */
 .theme-selector {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    /* Let grid auto-fill rows */
-    gap: 10px;
-    margin-bottom: 10px;
-  }
-  
-  .theme-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .theme-btn img {
-    width: 50px; /* Adjust size as desired */
-    height: 50px; /* Adjust size as desired */
-    object-fit: cover;
-    border-radius: 4px;
-  }
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  /* Let grid auto-fill rows */
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.theme-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.theme-btn img {
+  width: 50px; /* Adjust size as desired */
+  height: 50px; /* Adjust size as desired */
+  object-fit: cover;
+  border: 2px solid var(--accent-color);
+  border-radius: 4px;
+}

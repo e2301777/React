@@ -8,31 +8,32 @@ import BuildContextProvider, { BuildContext } from "./components/build-context";
 
 function AppContent() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { theme, setTheme } = useContext(BuildContext);
+  const { theme, colorScheme, setTheme } = useContext(BuildContext);
 
-  // Update the background image of the root element when theme changes.
+  // Update the background image and color scheme of the root element when theme changes.
   useEffect(() => {
     const rootEl = document.getElementById("root");
     if (rootEl) {
       rootEl.style.backgroundImage = `url(${new URL(`./assets/${theme}`, import.meta.url).href})`;
+      rootEl.style.setProperty("--primary-color", colorScheme.primary);
+      rootEl.style.setProperty("--secondary-color", colorScheme.secondary);
+      rootEl.style.setProperty("--accent-color", colorScheme.accent);
     }
-  }, [theme]);
+  }, [theme, colorScheme]);
 
-  // Array of 13 theme image filenames from your assets folder
   const themeImages = [
-    "default.PNG",
-    "BulletAngelSkin.PNG",
-    "KDASkin.PNG",
-    "PrestigeKDASkin.PNG",
-    "KDAALLOUTSkin.PNG",
-    "PrestigeKDAALLOUTSkin.PNG",
-    "iGSkin.PNG",
-    "ArcadeSkin.PNG",
-    "StarGuardianSkin.PNG",
-    "HeavenscaleSkin.PNG",
-    "InkshadowSkin.PNG",
-    "LagoonDragonSkin.PNG",
-    // Add any additional image filename if needed to total 13
+    "Default.PNG",
+    "BulletAngel.PNG",
+    "KDA.PNG",
+    "PrestigeKDA.PNG",
+    "KDAALLOUT.PNG",
+    "PrestigeKDAALLOUT.PNG",
+    "iG.PNG",
+    "Arcade.PNG",
+    "StarGuardian.PNG",
+    "Heavenscale.PNG",
+    "Inkshadow.PNG",
+    "LagoonDragon.PNG",
   ];
 
   const toggleModal = () => {
@@ -41,7 +42,6 @@ function AppContent() {
 
   const selectTheme = (imageName) => {
     setTheme(imageName);
-    console.log("Theme selected:", imageName);
     toggleModal();
   };
 
@@ -54,12 +54,10 @@ function AppContent() {
         <Stats />
       </div>
 
-      {/* Settings Button centered below the app-container */}
       <button className="settings-button" onClick={toggleModal}>
         Theme selector
       </button>
 
-      {/* Modal overlay plus settings modal */}
       {isModalOpen && (
         <>
           <div className="modal-overlay" onClick={toggleModal}></div>
@@ -68,7 +66,7 @@ function AppContent() {
             <div className="theme-selector">
               {themeImages.map((img, index) => (
                 <button key={index} className="theme-btn" onClick={() => selectTheme(img)}>
-                  <img src={new URL(`./assets/${img}`, import.meta.url).href} alt={img} />
+                  <img src={new URL(`./assets/${img}`, import.meta.url).href} alt={img} title={img}/>
                 </button>
               ))}
             </div>
